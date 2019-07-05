@@ -19,40 +19,19 @@ class FeeThreshold implements FeeThresholdInterface
      */
     private $fees;
 
-    public function __construct(array $fees, float $amount)
+    /**
+     * FeeThreshold constructor.
+     * @param float $amount
+     */
+    public function __construct(float $amount)
     {
-        $this->fees = $fees;
         $this->amount = $amount;
     }
 
     /**
      * @inheritDoc
      */
-    public function getMinFee(): int
-    {
-        try {
-            return $this->fees[$this->getMinAmountThreshold()];
-        } catch (\Exception $exception) {
-            throw new FeeException('Invalid Amount');
-        }
-    }
-
-    /**
-     * @inheritDoc
-     */
-    public function getMaxFee(): int
-    {
-        try {
-            return $this->fees[$this->getMaxAmountThreshold()];
-        } catch (\Exception $exception) {
-            throw new FeeException('Invalid Amount');
-        }
-    }
-
-    /**
-     * @inheritDoc
-     */
-    public function getMinAmountThreshold(): int
+    public function getMin(): int
     {
         return intval(floor($this->amount / 1000) * 1000);
     }
@@ -60,7 +39,7 @@ class FeeThreshold implements FeeThresholdInterface
     /**
      * @inheritDoc
      */
-    public function getMaxAmountThreshold(): int
+    public function getMax(): int
     {
         return intval(ceil($this->amount / 1000) * 1000);
     }

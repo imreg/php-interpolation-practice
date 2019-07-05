@@ -12,23 +12,11 @@ interface FeeThresholdInterface
 {
     /**
      * @return int
-     * @throws FeeException
      */
-    public function getMinFee(): int;
-
-    /**
-     * @return int
-     * @throws FeeException
-     */
-    public function getMaxFee(): int;
+    public function getMax(): int;
 
     /**
      * @return int
      */
-    public function getMaxAmountThreshold(): int;
-
-    /**
-     * @return int
-     */
-    public function getMinAmountThreshold(): int;
+    public function getMin(): int;
 }

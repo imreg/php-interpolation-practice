@@ -17,7 +17,7 @@ class FeeCalculatorSpec extends ObjectBehavior
 {
     function let()
     {
-        $this->beConstructedWith(new Fees(), new FeeInterpolation());
+        $this->beConstructedWith(new FeeInterpolation());
     }
 
     function it_returns_value_0_calculation_of_loan_when_term_12_and_amount_0()
