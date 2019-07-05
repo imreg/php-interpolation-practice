@@ -18,11 +18,6 @@ class FeeCalculatorTest extends TestCase
 {
     public function testCalculation()
     {
-//        $fees = $this->createMock(Fees::class);
-//        $fees->expects($this->any())
-//            ->method('getFeesByAmount')
-//            ->willReturn(new FeeThreshold(4325));//[4000 => 100, 5000 => 140],
-
         $interpolation = $this->createMock(FeeInterpolation::class);
         $interpolation->expects($this->any())
             ->method('roundUp')
