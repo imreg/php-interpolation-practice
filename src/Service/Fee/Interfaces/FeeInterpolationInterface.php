@@ -12,7 +12,7 @@ interface FeeInterpolationInterface
      * @return float
      * @throws FeeException
      */
-    public function interpolation($amount, FeeThresholdInterface $feeThreshold): float;
+    public function interpolation($amount, FeesInterface $fees, FeeThresholdInterface $feeThreshold): float;
 
     /**
      * @param float $value

@@ -5,9 +5,12 @@ namespace Interpolation\Service\Fee\Interfaces;
 interface FeesInterface
 {
     /**
-     * @param int $term
-     * @param float $amount
-     * @return FeeThresholdInterface
+     * @return int
      */
-    public function getFeesByAmount(int $term, float $amount): FeeThresholdInterface;
+    public function getMin():int;
+
+    /**
+     * @return int
+     */
+    public function getMax():int;
 }

@@ -13,9 +13,12 @@ class FeeCalculator implements FeeCalculatorInterface
     private $fees;
     private $feeInterpolation;
 
-    public function __construct(FeesInterface $fees, FeeInterpolation $feeInterpolation)
+    /**
+     * FeeCalculator constructor.
+     * @param FeeInterpolation $feeInterpolation
+     */
+    public function __construct(FeeInterpolation $feeInterpolation)
     {
-        $this->fees = $fees;
         $this->feeInterpolation = $feeInterpolation;
     }
 
@@ -25,9 +28,10 @@ class FeeCalculator implements FeeCalculatorInterface
     public function calculate(LoanApplication $application): float
     {
         try {
-            $dataSet = $this->fees->getFeesByAmount($application->getTerm(), $application->getAmount());
+            $threshold = new FeeThreshold($application->getAmount());
+            $fees = new Fees(new FeeDataset($application->getTerm()), $threshold);
             $result = $this->feeInterpolation
-                ->interpolation($application->getAmount(), $dataSet);
+                ->interpolation($application->getAmount(), $fees, $threshold);
             return $this->feeInterpolation
                 ->roundUp($result);
         } catch (FeeException $exception) {

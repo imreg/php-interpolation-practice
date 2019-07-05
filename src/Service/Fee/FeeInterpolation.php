@@ -4,6 +4,7 @@ declare(strict_types=1);
 namespace Interpolation\Service\Fee;
 
 use Interpolation\Service\Fee\Interfaces\FeeInterpolationInterface;
+use Interpolation\Service\Fee\Interfaces\FeesInterface;
 use Interpolation\Service\Fee\Interfaces\FeeThresholdInterface;
 
 /**
@@ -21,15 +22,15 @@ class FeeInterpolation implements FeeInterpolationInterface
     /**
      * @inheritDoc
      */
-    public function interpolation($amount, FeeThresholdInterface $feeThreshold): float
+    public function interpolation($amount, FeesInterface $fees, FeeThresholdInterface $feeThreshold): float
     {
         return (
-                ($amount - $feeThreshold->getMinAmountThreshold())
+                ($amount - $feeThreshold->getMin())
                 *
-                ($feeThreshold->getMaxFee() - $feeThreshold->getMinFee())
+                ($fees->getMax() - $fees->getMin())
                 /
-                ($feeThreshold->getMaxAmountThreshold() - $feeThreshold->getMinAmountThreshold())
-            ) + $feeThreshold->getMinFee();
+                ($feeThreshold->getMax() - $feeThreshold->getMin())
+            ) + $fees->getMin();
     }
 
     /**

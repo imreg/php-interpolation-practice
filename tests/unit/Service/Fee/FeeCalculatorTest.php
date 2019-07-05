@@ -18,17 +18,17 @@ class FeeCalculatorTest extends TestCase
 {
     public function testCalculation()
     {
-        $fees = $this->createMock(Fees::class);
-        $fees->expects($this->any())
-            ->method('getFeesByAmount')
-            ->willReturn(new FeeThreshold([4000 => 100, 5000 => 140], 4325));
+//        $fees = $this->createMock(Fees::class);
+//        $fees->expects($this->any())
+//            ->method('getFeesByAmount')
+//            ->willReturn(new FeeThreshold(4325));//[4000 => 100, 5000 => 140],
 
         $interpolation = $this->createMock(FeeInterpolation::class);
         $interpolation->expects($this->any())
             ->method('roundUp')
             ->willReturn(115.0);
 
-        $calculator = new FeeCalculator($fees, $interpolation);
+        $calculator = new FeeCalculator($interpolation);
         $application = new LoanApplication(12, 4325);
         $fee = $calculator->calculate($application);
         $this->assertEquals(115.0, $fee);
