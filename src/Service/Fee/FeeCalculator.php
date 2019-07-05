@@ -6,18 +6,17 @@ namespace Interpolation\Service\Fee;
 use Interpolation\Model\LoanApplication;
 use Interpolation\Service\Fee\Exceptions\FeeException;
 use Interpolation\Service\Fee\Interfaces\FeeCalculatorInterface;
-use Interpolation\Service\Fee\Interfaces\FeesInterface;
+use Interpolation\Service\Fee\Interfaces\FeeInterpolationInterface;
 
 class FeeCalculator implements FeeCalculatorInterface
 {
-    private $fees;
     private $feeInterpolation;
 
     /**
      * FeeCalculator constructor.
-     * @param FeeInterpolation $feeInterpolation
+     * @param FeeInterpolationInterface $feeInterpolation
      */
-    public function __construct(FeeInterpolation $feeInterpolation)
+    public function __construct(FeeInterpolationInterface $feeInterpolation)
     {
         $this->feeInterpolation = $feeInterpolation;
     }

@@ -31,7 +31,7 @@ composer install
 use Interpolation\Model\LoanApplication;
 use Interpolation\Service\Fee\FeeCalculator;
 
-$calculator = new FeeCalculator();
+$calculator = new FeeCalculator(new FeeInterpolation());
 
 $application = new LoanApplication(24, 2750);
 $fee = $calculator->calculate($application);
